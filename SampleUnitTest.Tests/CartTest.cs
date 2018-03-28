@@ -13,6 +13,7 @@ namespace SampleUnitTest.Tests
         private CartItem _cartItem;
         private CartManager _cartManager;
 
+        //her test metotundan önce çalışacak olan test testInitialize metotu
         [TestInitialize]
         public void TestInitialize()
         {
@@ -29,6 +30,13 @@ namespace SampleUnitTest.Tests
             };
 
             _cartManager.Add(_cartItem);
+        }
+
+        //her test metotundan sonra çalışacak olan test testCleanup metotu
+        [TestCleanup]
+        public void TestCleanUp()
+        {
+            _cartManager.Clear();
         }
 
         [TestMethod]
