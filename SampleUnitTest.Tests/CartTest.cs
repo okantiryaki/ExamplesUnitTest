@@ -10,15 +10,14 @@ namespace SampleUnitTest.Tests
     [TestClass]
     public class CartTest
     {
-        [TestMethod]
-        public void sepete_urun_eklenebilir()
-        {
-            // Arrange
-            // bu değer fonksiyonumuz eğer doğru çalışır ise bize dönücek olan değer
-            const int beklenen = 1;
+        private CartItem _cartItem;
+        private CartManager _cartManager;
 
-            var cartManager = new CartManager();
-            var cartItem = new CartItem
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            _cartManager = new CartManager();
+            _cartItem = new CartItem
             {
                 Product = new Product
                 {
@@ -27,14 +26,38 @@ namespace SampleUnitTest.Tests
                     ProductPrice = 120
                 },
                 Quantity = 1
-            };            
-            
+            };
+
+            _cartManager.Add(_cartItem);
+        }
+
+        [TestMethod]
+        public void sepete_urun_eklenebilir()
+        {
+            // Arrange
+            // bu değer fonksiyonumuz eğer doğru çalışır ise bize dönücek olan değer
+            const int beklenen = 1;
+
             //Act Olay
-            cartManager.Add(cartItem);
-            var toplamElamanSayisi = cartManager.TotalItems;
+            _cartManager.Add(_cartItem);
+            var toplamElamanSayisi = _cartManager.TotalItems;
 
             // burada karşılaştırma yapıyoruz.
             Assert.AreEqual(beklenen, toplamElamanSayisi);
+        }
+
+        [TestMethod]
+        public void sepetten_urun_cikartilabilmelidir()
+        {
+
+            _cartManager.Add(_cartItem);
+            var sepetteOlanUrunSayisi = _cartManager.TotalItems;
+
+            _cartManager.Remove(1);
+            var sepetteKalanGerekenUrunSayisi = _cartManager.TotalItems;
+
+            // burada karşılaştırma yapıyoruz.
+            Assert.AreEqual(sepetteOlanUrunSayisi - 1, sepetteKalanGerekenUrunSayisi);
         }
     }
 }

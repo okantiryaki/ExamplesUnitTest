@@ -11,7 +11,6 @@ namespace SampleUnitTest
         // ihtiyaçlarım nelerdir ?
         // sepete ürün eklenebilir olması lazım
         // sepetten ürün çıkartılabilir olması lazım
-        // sepet temizlenebilir olması lazım
 
         private readonly List<CartItem> _cartItems;
 
