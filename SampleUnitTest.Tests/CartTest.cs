@@ -39,7 +39,6 @@ namespace SampleUnitTest.Tests
             const int beklenen = 1;
 
             //Act Olay
-            _cartManager.Add(_cartItem);
             var toplamElamanSayisi = _cartManager.TotalItems;
 
             // burada karşılaştırma yapıyoruz.
